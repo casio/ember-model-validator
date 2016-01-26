@@ -313,7 +313,8 @@ export default Ember.Mixin.create({
   },
 	_validateMustContainCapital: function(property, validation) {
 		let notContainCapital = String(this.get(property)).match(/(?=.*[A-Z])/) === null,
-		    message = validation.mustContainCapital.message || Messages.mustContainCapitalMessage;
+        message = this._getCustomMessage(validation.mustContainCapitalMessage,
+            Messages.mustContainCapitalMessage, 'mustContainCapital');
 
 		if (validation.mustContainCapital && notContainCapital) {
 			this.set('isValidNow', false);
@@ -322,7 +323,8 @@ export default Ember.Mixin.create({
 	},
 	_validateMustContainLower: function(property, validation) {
 		let containsLower = String(this.get(property)).match(/(?=.*[a-z])/) !== null,
-		    message = validation.mustContainLower.message || Messages.mustContainLowerMessage;
+        message = this._getCustomMessage(validation.mustContainLowerMessage,
+            Messages.mustContainLowerMessage, 'mustContainLower');
 
 		if (validation.mustContainLower && !containsLower) {
 			this.set('isValidNow', false);
@@ -331,7 +333,8 @@ export default Ember.Mixin.create({
 	},
 	_validateMustContainNumber: function(property, validation) {
 		let containsNumber = String(this.get(property)).match(/(?=.*[0-9])/) !== null,
-		    message = validation.mustContainNumber.message || Messages.mustContainNumberMessage;
+		    message = this._getCustomMessage(validation.mustContainNumberMessage,
+            Messages.mustContainNumberMessage, 'mustContainNumber');
 
 		if (validation.mustContainNumber && !containsNumber) {
 			this.set('isValidNow', false);
@@ -342,7 +345,8 @@ export default Ember.Mixin.create({
 		let regexString = validation.mustContainSpecial.acceptableChars || '-+_!@#$%^&*.,?()',
 		    regex = new RegExp(`(?=.*[${regexString}])`),
 		    containsSpecial = String(this.get(property)).match(regex) !== null,
-		    message = validation.mustContainSpecial.message || Messages.mustContainSpecialMessage;
+        message = this._getCustomMessage(validation.mustContainSpecialMessage,
+            Messages.mustContainSpecialMessage, 'mustContainSpecial');
 
 		if (validation.mustContainSpecial && !containsSpecial) {
 			this.set('isValidNow', false);
