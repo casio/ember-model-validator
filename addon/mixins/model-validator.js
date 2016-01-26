@@ -313,7 +313,7 @@ export default Ember.Mixin.create({
   },
 	_validateMustContainCapital: function(property, validation) {
 		let notContainCapital = String(this.get(property)).match(/(?=.*[A-Z])/) === null,
-        message = this._getCustomMessage(validation.mustContainCapitalMessage,
+        message = this._getCustomMessage(validation.mustContainCapital,
             Messages.mustContainCapitalMessage, 'mustContainCapital');
 
 		if (validation.mustContainCapital && notContainCapital) {
@@ -323,7 +323,7 @@ export default Ember.Mixin.create({
 	},
 	_validateMustContainLower: function(property, validation) {
 		let containsLower = String(this.get(property)).match(/(?=.*[a-z])/) !== null,
-        message = this._getCustomMessage(validation.mustContainLowerMessage,
+        message = this._getCustomMessage(validation.mustContainLower,
             Messages.mustContainLowerMessage, 'mustContainLower');
 
 		if (validation.mustContainLower && !containsLower) {
@@ -333,7 +333,7 @@ export default Ember.Mixin.create({
 	},
 	_validateMustContainNumber: function(property, validation) {
 		let containsNumber = String(this.get(property)).match(/(?=.*[0-9])/) !== null,
-		    message = this._getCustomMessage(validation.mustContainNumberMessage,
+		    message = this._getCustomMessage(validation.mustContainNumber,
             Messages.mustContainNumberMessage, 'mustContainNumber');
 
 		if (validation.mustContainNumber && !containsNumber) {
@@ -345,7 +345,7 @@ export default Ember.Mixin.create({
 		let regexString = validation.mustContainSpecial.acceptableChars || '-+_!@#$%^&*.,?()',
 		    regex = new RegExp(`(?=.*[${regexString}])`),
 		    containsSpecial = String(this.get(property)).match(regex) !== null,
-        message = this._getCustomMessage(validation.mustContainSpecialMessage,
+        message = this._getCustomMessage(validation.mustContainSpecial,
             Messages.mustContainSpecialMessage, 'mustContainSpecial');
 
 		if (validation.mustContainSpecial && !containsSpecial) {
